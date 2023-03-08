@@ -52,7 +52,7 @@ while game_loop:
     if user_input == "kill" or moves == 0:
         game_loop = False
 
-    if user_input == "w": movement(-1,0)
+    elif user_input == "w": movement(-1,0)
     elif user_input == "s": movement(1,0)
     elif user_input == "d": movement(0,1)
     elif user_input == "a": movement(0,-1)
