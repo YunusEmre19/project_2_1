@@ -7,10 +7,13 @@ import os
 # 2 -> player
 # 3 -> box
 # 4 -> button
+# 5 -> hole
+
 level_test_1 = np.ones((7,7))
 level_test_1[1:6,1:6] = 0
 level_test_1[4,2] = 3
 level_test_1[5,5] = 4
+level_test_1[3,4] = 5
 
 player_x = 3
 player_y = 3
@@ -29,10 +32,13 @@ def movement(y_move,x_move):
         next_pos = level_test_1[player_y + 2*y_move, player_x + 2*x_move]
         if next_pos == 0:
             level_test_1[player_y + 2*y_move, player_x + 2*x_move] = 3
-        if next_pos == 4:
+        elif next_pos == 4:
             game_loop = False
             is_winning = True
-    if moved_pos == 0 or (next_pos == 0 and moved_pos == 3):
+        elif next_pos == 5:
+            level_test_1[player_y + 2*y_move, player_x + 2*x_move] = 0
+
+    if moved_pos == 0 or (moved_pos == 3 and next_pos in {0,5}):
         level_test_1[player_y,player_x] = 0
         player_y+=y_move
         player_x+=x_move
